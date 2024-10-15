@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User bot</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f9f3e6;
+            color: #333;
+        }
+        .chat-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff6f61;
+        }
+        .message {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .user {
+            background-color: #ffcc80;
+            color: #000;
+            border-radius: 10px 10px 0 10px;
+            display: inline-block;
+        }
+        .bot {
+            background-color: #c5e1a5;
+            color: #000;
+            border-radius: 10px 10px 10px 0;
+            display: inline-block;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        input[type="submit"], button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #ff8563;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>🥳 I am a User Chatbot 🤖</h1>
+        <div id="chat-history">
+            {% for chat in chat_history %}
+                <div class="message user">
+                    <span class="user">You:</span> {{ chat.user }}
+                </div>
+                <div class="message bot">
+                    <span class="bot">Bot:</span> {{ chat.bot }}
+                </div>
+            {% endfor %}
+        </div>
+        <form method="POST">
+            <input type="text" name="user_question" placeholder="Ask a question here!" required>
+            <input type="submit" value="Send">
+        </form>
+        <form method="POST" action="{{ url_for('reset') }}">
+            <button type="submit">Start New Session</button>
+        </form>
+    </div>
+</body>
+</html>
